@@ -12,6 +12,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -24,12 +25,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.LoadState
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.data.Result
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.ui.theme.PruebaMacroPayTheme
 import timber.log.Timber
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    navigateToMovies: (String) -> Unit,
+    snackbarHostState: SnackbarHostState,
+) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isUserError by rememberSaveable { mutableStateOf(false) }
@@ -39,9 +44,19 @@ fun LoginScreen() {
     val isLoged by viewModel.isLoginSuccess.collectAsStateWithLifecycle()
 
     when (isLoged) {
-        is Result.Error -> Timber.e("Error en logueo: ${(isLoged as Result.Error<Boolean>).error}")
+        is Result.Error -> {
+            Timber.e("Error en logueo: ${(isLoged as Result.Error<Boolean>).error}")
+            LaunchedEffect(key1 = snackbarHostState) {
+                snackbarHostState.showSnackbar(
+                    (isLoged as Result.Error<Boolean>).error ?: "Error en logueo"
+                )
+            }
+        }
         is Result.Loading -> Timber.d("Comienza proceso de login")
-        is Result.Success -> Timber.d("Se ha logueado correctamente")
+        is Result.Success -> {
+            Timber.d("Se ha logueado correctamente")
+            navigateToMovies("Juan Carlos Flores Bastida")
+        }
         null -> Timber.i("Inicializado en view model")
     }
 
@@ -144,10 +159,3 @@ private fun validate(text: String?): Boolean {
     return text.isNullOrBlank()
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewLoginScreen() {
-    PruebaMacroPayTheme {
-        LoginScreen()
-    }
-}

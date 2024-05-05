@@ -25,6 +25,7 @@ coilVersion = "2.5.0"
 plugin-ksp-version = "1.9.0-1.0.12"
 lifecycleRuntimeCompose = "2.7.0"
 googleServices = "4.4.1"
+volley = "1.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -73,6 +74,7 @@ coil-gif = { module = "io.coil-kt:coil-gif", version.ref = "coilVersion" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coilVersion" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
 
 [bundles]
 compilers-kapt-hilt = [

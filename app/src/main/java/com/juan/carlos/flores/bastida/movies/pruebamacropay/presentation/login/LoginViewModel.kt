@@ -2,7 +2,7 @@ package com.juan.carlos.flores.bastida.movies.pruebamacropay.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.usecases.LoginUseCase
+import com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.usecases.login.LoginUseCase
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.data.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

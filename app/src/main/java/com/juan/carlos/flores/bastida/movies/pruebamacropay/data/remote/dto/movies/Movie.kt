@@ -3,7 +3,7 @@ package com.juan.carlos.flores.bastida.movies.pruebamacropay.data.remote.dto.mov
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class Movie(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")

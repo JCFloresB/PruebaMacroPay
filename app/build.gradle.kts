@@ -15,6 +15,7 @@ val prop = Properties().apply {
 }
 val baseUrl: String = prop.getProperty("API_BASE_URL")
 val apiToken: String = prop.getProperty("API_READ_TOKEN")
+val baseUrlImage: String = prop.getProperty("BASE_URL_IMAGE")
 
 android {
     namespace = "com.juan.carlos.flores.bastida.movies.pruebamacropay"
@@ -38,6 +39,7 @@ android {
 
         buildConfigField("String", "BASE_URL", baseUrl)
         buildConfigField("String", "API_READ_TOKEN", apiToken)
+        buildConfigField("String", "BASE_URL_IMAGE", baseUrlImage)
     }
 
     buildTypes {
@@ -55,6 +57,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += listOf(
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+            "-opt-in=androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi",
+            "-opt-in=androidx.paging.ExperimentalPagingApi",
+            "-opt-in=androidx.compose.foundation.layout.ExperimentalLayoutApi",
+        )
     }
     buildFeatures {
         compose = true

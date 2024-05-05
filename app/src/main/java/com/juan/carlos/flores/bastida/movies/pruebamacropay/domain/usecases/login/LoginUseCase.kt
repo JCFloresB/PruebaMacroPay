@@ -1,4 +1,4 @@
-package com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.usecases
+package com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.usecases.login
 
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.data.repository.LoginRepositoryImpl
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.data.Result
