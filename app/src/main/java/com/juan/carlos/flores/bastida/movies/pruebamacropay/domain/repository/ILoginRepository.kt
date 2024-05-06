@@ -5,4 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface ILoginRepository {
     fun login(user: String, password:String): Flow<Result<Boolean>>
+
+    suspend fun saveSession(isLogged: Boolean)
+
+    fun getSession(): Flow<Boolean>
 }

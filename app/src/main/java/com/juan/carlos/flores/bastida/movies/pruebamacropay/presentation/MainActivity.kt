@@ -1,21 +1,21 @@
-package com.juan.carlos.flores.bastida.movies.pruebamacropay
+package com.juan.carlos.flores.bastida.movies.pruebamacropay.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedContentScope
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
@@ -26,6 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.get
 import androidx.navigation.navArgument
+import com.juan.carlos.flores.bastida.movies.pruebamacropay.BuildConfig
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.presentation.components.TopBar
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.presentation.login.LoginScreen
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.presentation.movies.moviedetail.MovieDetailScreen
@@ -36,10 +37,10 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.i("Valor de url: " + BuildConfig.BASE_URL)
-        Timber.i("Valor de token: " + BuildConfig.API_READ_TOKEN)
         setContent {
             PruebaMacroPayTheme {
                 val navController = rememberNavController()
@@ -55,7 +56,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(
                             route = "login",
-                            label = "Login"
+                            label = "Login",
                         ) {
                             LoginScreen(
                                 navigateToMovies = { name ->
@@ -73,7 +74,8 @@ class MainActivity : ComponentActivity() {
                                 navigateToDetail = { movieId ->
                                     navController.navigate("detail_movie/$movieId")
                                 },
-                                snackbarHostState = snackbarHostState
+                                snackbarHostState = snackbarHostState,
+                                navController = navController
                             )
                         }
                         composable(

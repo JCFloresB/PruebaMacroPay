@@ -1,7 +1,6 @@
 package com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.usecases.movie
 
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.data.remote.dto.moviedetail.GetMovieDetailResponse
-import com.juan.carlos.flores.bastida.movies.pruebamacropay.data.remote.dto.movies.Movie
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.data.Result
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow

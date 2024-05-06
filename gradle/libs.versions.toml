@@ -1,5 +1,6 @@
 [versions]
 agp = "8.3.2"
+datastorePreferences = "1.1.1"
 firebaseAuth = "23.0.0"
 firebaseBom = "33.0.0"
 kotlin = "1.9.0"
@@ -29,6 +30,7 @@ volley = "1.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-material-icons-extended-android = { module = "androidx.compose.material:material-icons-extended-android", version.ref = "materialIconsExtendedAndroid" }
 firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
@@ -103,6 +105,7 @@ layer-ui = [
     "kotlinx-serialization-json",
     "androidx-lifecycle-runtime-compose",
     "firebase-auth",
+    "androidx-datastore-preferences"
 ]
 
 [plugins]

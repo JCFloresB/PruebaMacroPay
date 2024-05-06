@@ -4,9 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.data.remote.MovieAPI
-import com.juan.carlos.flores.bastida.movies.pruebamacropay.data.remote.MoviePaging
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.data.remote.dto.moviedetail.GetMovieDetailResponse
-import com.juan.carlos.flores.bastida.movies.pruebamacropay.data.remote.dto.movies.GetMoviesResponse
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.data.remote.dto.movies.Movie
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.data.Result
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.repository.MoviesRepository

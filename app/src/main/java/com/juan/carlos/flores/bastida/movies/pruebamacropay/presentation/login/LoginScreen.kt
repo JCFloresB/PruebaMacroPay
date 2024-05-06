@@ -18,16 +18,15 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.paging.LoadState
 import com.juan.carlos.flores.bastida.movies.pruebamacropay.domain.data.Result
-import com.juan.carlos.flores.bastida.movies.pruebamacropay.ui.theme.PruebaMacroPayTheme
 import timber.log.Timber
 
 @Composable
@@ -35,10 +34,12 @@ fun LoginScreen(
     navigateToMovies: (String) -> Unit,
     snackbarHostState: SnackbarHostState,
 ) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("jc@gmail.com") }
+    var password by remember { mutableStateOf("password") }
     var isUserError by rememberSaveable { mutableStateOf(false) }
     var isPasswordError by rememberSaveable { mutableStateOf(false) }
+
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     val viewModel = hiltViewModel<LoginViewModel>()
     val isLoged by viewModel.isLoginSuccess.collectAsStateWithLifecycle()
@@ -97,7 +98,8 @@ fun LoginScreen(
             isPasswordError = isPasswordError,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp)
+                .padding(vertical = 8.dp),
+            keyboardController
         )
 
         Button(
@@ -122,7 +124,8 @@ fun PasswordField(
     password: String,
     onPasswordChange: (String) -> Unit,
     isPasswordError: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    keyboardController: SoftwareKeyboardController?
 ) {
     var passwordVisibility by remember { mutableStateOf(false) }
 
@@ -134,7 +137,7 @@ fun PasswordField(
         modifier = modifier,
         visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-        keyboardActions = KeyboardActions(onDone = { /* Acción al presionar "Listo" en el teclado */ }),
+        keyboardActions = KeyboardActions(onDone = { keyboardController?.hide() }),
         isError = isPasswordError,
         trailingIcon = {
             IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
